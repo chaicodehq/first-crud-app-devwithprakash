@@ -1,3 +1,5 @@
+import mongoose from "mongoose";
+
 /**
  * TODO: Handle errors
  *
@@ -10,4 +12,15 @@
  */
 export function errorHandler(err, req, res, next) {
   // Your code here
+  if (err instanceof mongoose.Error.ValidationError) {
+    const messages = Object.values(err.errors)
+      .map((e) => e.message)
+      .join(", ");
+
+    return res.status(400).json({ error: { message: messages } });
+  } else if (err instanceof mongoose.Error.CastError) {
+    return res.status(400).json({ error: { message: "Invalid id format" } });
+  } else {
+    return res.status(500).json({ error: { message: err.message } });
+  }
 }

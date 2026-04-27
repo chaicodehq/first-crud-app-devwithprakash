@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "node --watch src/server.js",
     "start": "node src/server.js",
-    "test": "NODE_OPTIONS=--experimental-vm-modules jest --runInBand",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
     "test:win": "set NODE_OPTIONS=--experimental-vm-modules&& jest --runInBand"
   },
   "keywords": [
@@ -21,8 +21,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^17.4.2",
     "express": "^4.19.2",
-    "mongoose": "^8.8.0"
+    "mongoose": "^8.8.0",
+    "nodemon": "^3.1.14"
   },
   "devDependencies": {
     "jest": "^29.7.0",

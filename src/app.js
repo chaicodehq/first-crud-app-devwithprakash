@@ -14,6 +14,17 @@ import { notFound } from "./middlewares/notFound.middleware.js";
  * 6. Add errorHandler middleware (must be last!)
  * 7. Return app
  */
+
 export function createApp() {
   // Your code here
+
+  const app = express();
+
+  app.use(express.json());
+
+  app.get("/health", (req, res) => res.json({ ok: true }));
+
+  app.use("/api/todos", todoRoutes, notFound, errorHandler);
+
+  return app;
 }
